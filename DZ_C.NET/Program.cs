@@ -39,7 +39,7 @@ namespace DZ_C.NET
 
             //Задание 3
             char st = Convert.ToChar(Console.ReadLine());
-            if()
+            
 
             Console.Read();
         }
