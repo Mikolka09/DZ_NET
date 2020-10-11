@@ -18,9 +18,16 @@ namespace DZ_C.NET
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
 
+
+            Console.SetCursorPosition(20,10);
+            Console.WriteLine("ДОБРО ПОЖАЛОВАТЬ В ИГРУ \"ПЬЯНИЦА\"!!!");
+            Thread.Sleep(2000);
             Game game = new Game();
+            Console.Clear();
+            game.CreateListPlayers();
             game.Reshuffling();
-            game.Print();
+            game.DistributionOfCards();
+            game.StartGame();
 
 
 
