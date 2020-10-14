@@ -18,10 +18,8 @@ namespace DZ_C.NET
             Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
 
-
-           
-
-
+            RaceGame rg = new RaceGame();
+            rg.StartGame();
 
 
             Console.Read();
