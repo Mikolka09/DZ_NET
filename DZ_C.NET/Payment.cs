@@ -19,10 +19,24 @@ namespace ConsoleApplication1
         public int CountDay { get; set; }
         public int PenaltyOnDay { get; set; }
         public int NumberDaysOverdue { get; set; }
-        public int Penalty { get; set; }
-        public int SumNoPenalty { get; }
-        public int SumTotal { get; }
-
+        private int penalty;
+        public int Penalty
+        {
+            get { return penalty = PayOnDay * CountDay; }
+            set{}
+        }
+        private int sumNoPenalty;
+        public int SumNoPenalty
+        {
+            get { return sumNoPenalty = PenaltyOnDay * NumberDaysOverdue; }
+            set{}
+        }
+        private int sumTotal;
+        public int SumTotal
+        {
+            get { return sumTotal = Penalty + SumNoPenalty; }
+            set{}
+        }
         public Payment()
         {
 
@@ -34,9 +48,9 @@ namespace ConsoleApplication1
             this.CountDay = CountDay;
             this.NumberDaysOverdue = NumberDaysOverdue;
             this.PenaltyOnDay = PenaltyOnDay;
-            Penalty = PayOnDay * CountDay;
-            SumNoPenalty = PenaltyOnDay * NumberDaysOverdue;
-            SumTotal = Penalty + SumNoPenalty;
+            penalty = PayOnDay * CountDay;
+            sumNoPenalty = PenaltyOnDay * NumberDaysOverdue;
+            sumTotal = Penalty + SumNoPenalty;
         }
 
         protected Payment(SerializationInfo info, StreamingContext context)
@@ -54,9 +68,9 @@ namespace ConsoleApplication1
                 CountDay = info.GetInt32("CountDay");
                 PenaltyOnDay = info.GetInt32("PenaltyOnDay");
                 NumberDaysOverdue = info.GetInt32("NumberDaysOverdue");
-                Penalty = info.GetInt32("Penalty");
-                SumNoPenalty = info.GetInt32("SumNoPenalty");
-                SumTotal = info.GetInt32("SumTotal");
+                penalty = info.GetInt32("Penalty");
+                sumNoPenalty = info.GetInt32("SumNoPenalty");
+                sumTotal = info.GetInt32("SumTotal");
             }
         }
 
