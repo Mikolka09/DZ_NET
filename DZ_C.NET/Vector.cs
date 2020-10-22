@@ -12,7 +12,7 @@ namespace DZ_C.NET
     [AttributeUsage(AttributeTargets.Property)]
     class ValueFromFile : Attribute
     {
-        public static string fname { get; set; }
+        string fname { get; set; }
 
         public ValueFromFile(string fn)
         {
