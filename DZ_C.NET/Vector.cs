@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace DZ_C.NET
     [AttributeUsage(AttributeTargets.Property)]
     class ValueFromFile : Attribute
     {
-        string fname;
+        public static string fname { get; set; }
 
         public ValueFromFile(string fn)
         {
@@ -23,18 +24,15 @@ namespace DZ_C.NET
             return fname;
         }
 
-        public static int LoadValue(string n)
+        public static int LoadValueFile(object[] at)
         {
-            var attr = typeof(Vector).GetProperty("X").GetCustomAttributes(true);
-            for (int i = 0; i < attr.Length; i++)
+            string name = "";
+            for (int i = 0; i < at.Length; i++)
             {
-                if (attr[i].GetType() == typeof(ValueFromFile))
-                {
-                    string fn;
-                    fn = i.ToString();
-                }
+                if (at[i].GetType() == typeof(ValueFromFile))
+                    name = at[i].ToString();
             }
-            StreamReader fs = File.OpenText(attr[0].ToString());
+            StreamReader fs = File.OpenText(name);
             int value = int.Parse(fs.ReadLine());
             fs.Close();
             return value;
@@ -91,7 +89,7 @@ namespace DZ_C.NET
             {
                 var attr = typeof(Vector).GetProperty("X").GetCustomAttributes(true);
                 if (attr.Length > 0)
-                    return ValueFromFile.LoadValue("X");
+                    return ValueFromFile.LoadValueFile(attr);
                 else
                     return x;
             }
